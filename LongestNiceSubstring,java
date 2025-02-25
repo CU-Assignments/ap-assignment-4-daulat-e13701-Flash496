@@ -1,0 +1,19 @@
+class Solution {
+    public String longestNiceSubstring(String s) {
+        if (s.length() < 2) return "";
+        
+        for (char c : s.toCharArray()) {
+            if (s.contains(Character.toString(Character.toUpperCase(c))) &&
+                s.contains(Character.toString(Character.toLowerCase(c)))) {
+                continue;
+            }
+            
+            String left = longestNiceSubstring(s.substring(0, s.indexOf(c)));
+            String right = longestNiceSubstring(s.substring(s.indexOf(c) + 1));
+
+            return left.length() >= right.length() ? left : right;
+        }
+
+        return s;
+    }
+}
